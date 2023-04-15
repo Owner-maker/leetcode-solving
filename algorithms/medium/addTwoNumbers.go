@@ -36,40 +36,15 @@ func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 	sum := l1.Val + l2.Val
 	extra := false
 
-	neededNextResNodeList := false
-
-	for curList1Node.Next != nil || curList2Node.Next != nil || sum > 9 || extra {
+	for curList1Node.Next != nil || curList2Node.Next != nil || sum > 0 || extra {
 		if extra {
 			sum++
 		}
 		extra = sum > 9
 
-		tail := sum % 10
-		curResListNode.Val = tail
-
-		if curList1Node.Next != nil {
-			curList1Node = curList1Node.Next
-			neededNextResNodeList = true
-		} else {
-			curList1Node = &ListNode{
-				Val:  0,
-				Next: nil,
-			}
-			neededNextResNodeList = false
-		}
-
-		if curList2Node.Next != nil {
-			curList2Node = curList2Node.Next
-			neededNextResNodeList = true
-		} else {
-			curList2Node = &ListNode{
-				Val:  0,
-				Next: nil,
-			}
-			neededNextResNodeList = false
-		}
-
-		if neededNextResNodeList {
+		curResListNode.Val = sum % 10
+		sum = 0
+		if curList1Node.Next != nil || curList2Node.Next != nil || sum > 9 || extra {
 			curResListNode.Next = &ListNode{
 				Val:  0,
 				Next: nil,
@@ -77,48 +52,30 @@ func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 			curResListNode = curResListNode.Next
 		}
 
-		sum = curList1Node.Val + curList2Node.Val
+		if curList1Node.Next != nil {
+			curList1Node = curList1Node.Next
+			sum += curList1Node.Val
+		}
+
+		if curList2Node.Next != nil {
+			curList2Node = curList2Node.Next
+			sum += curList2Node.Val
+		}
 	}
+	curResListNode = nil
 
 	return resList
 }
 
 func main() {
 	l1 := ListNode{
-		Val: 9,
-		Next: &ListNode{
-			Val: 9,
-			Next: &ListNode{
-				Val: 9,
-				Next: &ListNode{
-					Val: 9,
-					Next: &ListNode{
-						Val: 9,
-						Next: &ListNode{
-							Val: 9,
-							Next: &ListNode{
-								Val:  9,
-								Next: nil,
-							},
-						},
-					},
-				},
-			},
-		},
+		Val:  0,
+		Next: nil,
 	}
 
 	l2 := ListNode{
-		Val: 9,
-		Next: &ListNode{
-			Val: 9,
-			Next: &ListNode{
-				Val: 9,
-				Next: &ListNode{
-					Val:  9,
-					Next: nil,
-				},
-			},
-		},
+		Val:  1,
+		Next: nil,
 	}
 
 	res := addTwoNumbers(&l1, &l2)
