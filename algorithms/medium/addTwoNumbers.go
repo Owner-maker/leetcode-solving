@@ -1,7 +1,5 @@
 package main
 
-import "fmt"
-
 /**
  * Definition for singly-linked list.
  * type ListNode struct {
@@ -65,19 +63,4 @@ func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 	curResListNode = nil
 
 	return resList
-}
-
-func main() {
-	l1 := ListNode{
-		Val:  0,
-		Next: nil,
-	}
-
-	l2 := ListNode{
-		Val:  1,
-		Next: nil,
-	}
-
-	res := addTwoNumbers(&l1, &l2)
-	fmt.Println(res)
 }
