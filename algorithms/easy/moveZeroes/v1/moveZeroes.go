@@ -35,7 +35,3 @@ func moveZeroes(nums []int) {
 		nums[i], nums[length-i-1] = nums[length-i-1], nums[i]
 	}
 }
-
-func main() {
-	moveZeroes([]int{0, 1, 0, 3, 12})
-}

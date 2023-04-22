@@ -32,7 +32,3 @@ func moveZeroes(nums []int) {
 		}
 	}
 }
-
-func main() {
-	moveZeroes([]int{0, 0, 1})
-}
